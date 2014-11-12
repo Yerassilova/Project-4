@@ -239,55 +239,74 @@
 		  }
 		  		 
             function room0() {
-		     message = "room 0";
+		     message = "You are standing inside a mansion's hall. In the mansion" + 
+			           " there is a canary in a cage covered with black cloth, so" + 
+					   " that it does not sing and you cannot hear it. Your aim is" + 
+					   " to find the bird and release it. If it sings when flies" + 
+					   " away, you will become the happiest person."; //room 0
 			 presentMessage(message);	
 		  }
 		  
 		    function room1() {
-		     message = "room 1";
+		     message = "You entered a dark room with no windows, so you cannot see"+ 
+			           " anything..."; //room 1
 			 presentMessage(message);
 		  }
 		 
 		    function room2() {
-		     message = "room 2";
+		     message = "You entered a living room, there is a table and an armchair"+ 
+			           " in front of a chimney."; //room 2
 			 presentMessage(message);
 		  }
 		  
 		    function room3() {
 			   if ( inventory.indexOf("map") >= 0) {
-			       message = "room 3";
+			       message = "You are in a big room, there is a grand piano in the" +
+			                 " middle of the room and nothing else."; //room 3
 				} else {	
-                   message = "room 3, map";
+                   message = "You are in a big room, there is a grand piano in the" +
+			                 " middle of the room. There is a map on the piano," + 
+							 " you should take it!"; //room 3
 		        }
 		        presentMessage(message);
 			}
 	  
 		    function room4() {			     
 			   if ( inventory.indexOf("flashlight") >= 0) {
-		            message = "room 4";			        
+		            message = "You have entered a kitchen."; //room 4			        
 				} else {
-				   message = "room 4, flashlight";				     
+				   message = "You have entered a kitchen. You can see" + 
+				             " a flashlight on a table. The falshlight" + 
+							 " will help you to enter the dark room and" + 
+							 " see what's there."; //room 4				     
 		        }
 			    presentMessage(message);
 		    }
 		  
 		    function room5() {
-		     message = "room 5";
+		     message = "This is a dining hall. There is a large round table" + 
+			           " in the middle of the room."; //room 5
 			 presentMessage(message);
 		  }
 		  
 		    function room6() {
 		      if ( inventory.indexOf("Music") >= 0) {
-		            message = "room 6";			        
+		            message = "You entered a small and narrow corridor. You can" + 
+			                  " see pictures of previous owners of the mansion"; //room 6		        
 				} else {
-				   message = "room 6, musicSheet";				     
+				   message = "You entered a small and narrow corridor. You can" +  
+			                  " see pictures of previous owners of the mansion" + 
+							  " and a music sheet that is lying on the floor." + 
+							  " You can take it, it might become useful..."; //room 6				     
 		        }
 			    presentMessage(message);
 		    }
 		  
 		  
 		    function room7() {
-		     message = "room 7";
+		     message = "Now you are in a bedroom. There is a" + "\n" + 
+			           "bad, a desk and an old mirror in the room." + "\n" + 
+					   "Now you need to look at the mirror..."; //room 7
 			 presentMessage(message);
 		  }
 		  
@@ -319,7 +338,7 @@
 				if (curLoc === 3 && inventory.indexOf("map") < 0) {
 				    inventory = inventory + " map ";
 					document.getElementById("picture").style.visibility = "visible";					
-					message = "You have taken a map of the mansion.";
+					message = "You have taken the map of the mansion.";
                     checkScore();
 		            dspScore();	
                     document.getElementById("takeButton").disabled = true;					
@@ -366,6 +385,15 @@
 			   presentMessage(message);			  
 		   }
 
+		   function btn_Help() {
+		        message = "Navigate with buttons north, south, east, or west." + 
+				          " Collect items available with by pressing Take button" + 
+						  " or typing take into the command text area. Check your" + 
+						  " inventory by pressing My Inventory button. Score is" + 
+						  " reflected on the right. To see the map, you have to find it";
+				presentMessage(message);
+		   }
+		   
 		  //utility functions
 		   function presentMessage(message) {
 			   var target = document.getElementById("mainText");
