@@ -1,4 +1,4 @@
-              var curLoc = 0;
+            var curLoc = 0;
 			var score = 0;	
 			var inventory = "";
 						
@@ -20,6 +20,8 @@
 				buttonVisibility();			
 			    document.getElementById("picture").style.visibility = "hidden";
 				takeButtonVisibility();
+				document.getElementById("mainText").readOnly = true;
+				document.getElementById("scoreText").readOnly = true;
 				} 
 			   
 		   //navigation functions
@@ -173,13 +175,14 @@
 		            }
                   buttonVisibility();					
 		        }
-			
-		    //function txtCommand_keyPress(keyboardEvent) {
-			  // if (keyboardEvent.which === north) {
-			      // btn_go_North();
-				//}
-			//}
-			function btnGo_click() {			   
+
+            function txtCommand_keypress(e) {
+				 if (e.which === 13) {
+				     document.getElementById("go").onclick();
+					 }
+			}
+		
+			function btnGo_click() {             			
                txtCommand.value = txtCommand.value.toLowerCase();				  
 			    if (txtCommand.value === "north" || txtCommand.value === "n") {				
 			        btn_go_North();					
@@ -274,9 +277,14 @@
 		  }
 		  
 		    function room6() {
-		     message = "room 6";
-			 presentMessage(message);
-		  }
+		      if ( inventory.indexOf("Music") >= 0) {
+		            message = "room 6";			        
+				} else {
+				   message = "room 6, musicSheet";				     
+		        }
+			    presentMessage(message);
+		    }
+		  
 		  
 		    function room7() {
 		     message = "room 7";
@@ -312,21 +320,26 @@
 				    inventory = inventory + " map ";
 					document.getElementById("picture").style.visibility = "visible";					
 					message = "You have taken a map of the mansion.";
-					hasTakenMap = true;
                     checkScore();
 		            dspScore();	
                     document.getElementById("takeButton").disabled = true;					
 				 } else {			 
 			        if (curLoc === 4 && inventory.indexOf("flashlight") < 0) {
 				        inventory = inventory  + " flashlight ";
-					    message = "You have taken a flashlight.";
-					    hasTakenFlashlight = true;	
+					    message = "You have taken a flashlight.";	
                         checkScore();
 		                dspScore();	
-                        document.getElementById("takeButton").disabled = true;						
-			         } else {
-					     message = "There is nothing to take in this room.";
-						 
+                        document.getElementById("takeButton").disabled = true;	
+                      } else {
+                          if (curLoc === 6 && inventory.indexOf("Music") < 0) {
+				              inventory = inventory + " Music Sheet ";									
+					          message = "You have taken Music Sheet.";
+                              checkScore();							  
+		                      dspScore();	
+                              document.getElementById("takeButton").disabled = true;						 
+			                } else {
+					             message = "There is nothing to take in this room.";
+						 } 
 					 }
 			    }
 			  presentMessage(message);
@@ -371,13 +384,23 @@
 					if (curLoc === 4) {
 					   if (inventory.indexOf("flashlight") < 0){				        
 						   document.getElementById("takeButton").disabled = false;
-					    } else { 
-                           document.getElementById("takeButton").disabled = true;	
-                        }    							  
-				  
-				    }
+						} else {
+				             document.getElementById("takeButton").disabled = true;
+				        }
+					    
+				} else { 
+                     if (curLoc === 6) {
+					     if (inventory.indexOf("Mus") < 0){				        
+						     document.getElementById("takeButton").disabled = false;
+					      } else { 
+                              document.getElementById("takeButton").disabled = true;
+                            }									                                							  
+				} else {
+				      document.getElementById("takeButton").disabled = true;
+					 }
+				   }
                 }
-            }           				   
+            }			
 				   
 
 		   function buttonVisibility() {
@@ -420,7 +443,7 @@
 				        document.getElementById("southBtn").disabled = false;
 			            document.getElementById("westBtn").disabled = false;
 			            document.getElementById("eastBtn").disabled = false;
-						document.getElementById("takeButton").disabled = true;
+                        takeButtonVisibility();						
 				        break;
 				case 7: document.getElementById("northBtn").disabled = true;
 			            document.getElementById("southBtn").disabled = false;
@@ -538,6 +561,10 @@
 			 }
 			 
 			 if (curLoc === 4 && inventory.indexOf("flashlight") >= 0) {
+			     score = score + 5;
+				}
+			
+			if (curLoc === 6 && inventory.indexOf("Music") >= 0) {
 			     score = score + 5;
 				}
 			 
