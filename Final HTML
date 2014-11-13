@@ -83,9 +83,10 @@
 					  
 			<p id="Map"><strong>Map</strong></p>
 			
-			<img  src = project3map.png  id="picture" width-"580" height="500" alt="Map"/>
+			<img  src = "https://www.flickr.com/photos/128571350@N05/15156415013/" 
+			      id="picture" width="580" height="500" alt="Map"/>
 			
-			  
+			 
 	 
  
       </body>  
